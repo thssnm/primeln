@@ -1,0 +1,1303 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Primeln – das tägliche Rätselbeet aus Primzahlen</title>
+<meta name="description" content="Pflanze Primeln mit 2, 3, 5 und 7 Blütenblättern, bis jedes Schild sein Produkt zeigt. Jeden Tag ein neues Beet, für alle dasselbe. Läuft komplett im Browser.">
+<link rel="canonical" href="https://primeln.thssn.dev/">
+<meta name="theme-color" content="#E4EDDF" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0F1914" media="(prefers-color-scheme: dark)">
+<meta name="application-name" content="Primeln">
+<meta name="apple-mobile-web-app-title" content="Primeln">
+
+<!-- Linkvorschau in Messengern (WhatsApp, Signal, Telegram, iMessage, Slack …) -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Primeln">
+<meta property="og:locale" content="de_DE">
+<meta property="og:url" content="https://primeln.thssn.dev/">
+<meta property="og:title" content="Primeln – das tägliche Rätselbeet">
+<meta property="og:description" content="Pflanze Primeln mit 2, 3, 5 und 7 Blütenblättern, bis jedes Schild sein Produkt zeigt. Jeden Tag ein neues Beet.">
+<meta property="og:image" content="https://primeln.thssn.dev/og.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Das Primeln-Logo: vier bunte Primeln mit 2, 3, 5 und 7 Blütenblättern auf einem kleinen Beet.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Primeln – das tägliche Rätselbeet">
+<meta name="twitter:description" content="Jeden Tag ein neues Beet aus Primzahlen, für alle dasselbe.">
+<meta name="twitter:image" content="https://primeln.thssn.dev/og.png">
+
+<!-- Icons: das SVG steckt direkt in der Datei, die PNGs liegen daneben auf dem Server -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%232C231F'/%3E%3Crect x='8.00' y='8.00' width='39.00' height='39.00' rx='8.58' fill='%2346372F'/%3E%3Cg transform='translate(27.5 27.5) scale(0.3978)'%3E%3Cg fill='%237DB1FF'%3E%3Cpath d='M0 -6C-13 -12 -17 -30 -8 -38Q-3 -42 0 -35Q3 -42 8 -38C17 -30 13 -12 0 -6Z' transform='rotate(0.00) scale(1.55 1)'/%3E%3Cpath d='M0 -6C-13 -12 -17 -30 -8 -38Q-3 -42 0 -35Q3 -42 8 -38C17 -30 13 -12 0 -6Z' transform='rotate(180.00) scale(1.55 1)'/%3E%3C/g%3E%3Ccircle r='13.5' fill='%23FFD84A'/%3E%3C/g%3E%3Crect x='53.00' y='8.00' width='39.00' height='39.00' rx='8.58' fill='%2346372F'/%3E%3Cg transform='translate(72.5 27.5) scale(0.3978)'%3E%3Cg fill='%23FF76B3'%3E%3Cpath d='M0 -6C-13 -12 -17 -30 -8 -38Q-3 -42 0 -35Q3 -42 8 -38C17 -30 13 -12 0 -6Z' transform='rotate(0.00) scale(1.42 1)'/%3E%3Cpath d='M0 -6C-13 -12 -17 -30 -8 -38Q-3 -42 0 -35Q3 -42 8 -38C17 -30 13 -12 0 -6Z' transform='rotate(120.00) scale(1.42 1)'/%3E%3Cpath d='M0 -6C-13 -12 -17 -30 -8 -38Q-3 -42 0 -35Q3 -42 8 -38C17 -30 13 -12 0 -6Z' transform='rotate(240.00) scale(1.42 1)'/%3E%3C/g%3E%3Ccircle r='13.5' fill='%23FFD84A'/%3E%3C/g%3E%3Crect x='8.00' y='53.00' width='39.00' height='39.00' rx='8.58' fill='%2346372F'/%3E%3Cg transform='translate(27.5 72.5) scale(0.3978)'%3E%3Cg fill='%23FFD540'%3E%3Cpath d='M0 -6C-13 -12 -17 -30 -8 -38Q-3 -42 0 -35Q3 -42 8 -38C17 -30 13 -12 0 -6Z' transform='rotate(0.00) scale(1.04 1)'/%3E%3Cpath d='M0 -6C-13 -12 -17 -30 -8 -38Q-3 -42 0 -35Q3 -42 8 -38C17 -30 13 -12 0 -6Z' transform='rotate(72.00) scale(1.04 1)'/%3E%3Cpath d='M0 -6C-13 -12 -17 -30 -8 -38Q-3 -42 0 -35Q3 -42 8 -38C17 -30 13 -12 0 -6Z' transform='rotate(144.00) scale(1.04 1)'/%3E%3Cpath d='M0 -6C-13 -12 -17 -30 -8 -38Q-3 -42 0 -35Q3 -42 8 -38C17 -30 13 -12 0 -6Z' transform='rotate(216.00) scale(1.04 1)'/%3E%3Cpath d='M0 -6C-13 -12 -17 -30 -8 -38Q-3 -42 0 -35Q3 -42 8 -38C17 -30 13 -12 0 -6Z' transform='rotate(288.00) scale(1.04 1)'/%3E%3C/g%3E%3Ccircle r='13.5' fill='%23FF9B3D'/%3E%3C/g%3E%3Crect x='53.00' y='53.00' width='39.00' height='39.00' rx='8.58' fill='%2346372F'/%3E%3Cg transform='translate(72.5 72.5) scale(0.3978)'%3E%3Cg fill='%23FFF5E3'%3E%3Cpath d='M0 -6C-13 -12 -17 -30 -8 -38Q-3 -42 0 -35Q3 -42 8 -38C17 -30 13 -12 0 -6Z' transform='rotate(0.00) scale(0.76 1)'/%3E%3Cpath d='M0 -6C-13 -12 -17 -30 -8 -38Q-3 -42 0 -35Q3 -42 8 -38C17 -30 13 -12 0 -6Z' transform='rotate(51.43) scale(0.76 1)'/%3E%3Cpath d='M0 -6C-13 -12 -17 -30 -8 -38Q-3 -42 0 -35Q3 -42 8 -38C17 -30 13 -12 0 -6Z' transform='rotate(102.86) scale(0.76 1)'/%3E%3Cpath d='M0 -6C-13 -12 -17 -30 -8 -38Q-3 -42 0 -35Q3 -42 8 -38C17 -30 13 -12 0 -6Z' transform='rotate(154.29) scale(0.76 1)'/%3E%3Cpath d='M0 -6C-13 -12 -17 -30 -8 -38Q-3 -42 0 -35Q3 -42 8 -38C17 -30 13 -12 0 -6Z' transform='rotate(205.71) scale(0.76 1)'/%3E%3Cpath d='M0 -6C-13 -12 -17 -30 -8 -38Q-3 -42 0 -35Q3 -42 8 -38C17 -30 13 -12 0 -6Z' transform='rotate(257.14) scale(0.76 1)'/%3E%3Cpath d='M0 -6C-13 -12 -17 -30 -8 -38Q-3 -42 0 -35Q3 -42 8 -38C17 -30 13 -12 0 -6Z' transform='rotate(308.57) scale(0.76 1)'/%3E%3C/g%3E%3Ccircle r='13.5' fill='%23FFD84A'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.webmanifest">
+<style>
+:root{
+  color-scheme: light;
+  --bubble:#D5EBC9; --bubble-ink:#16244D; --card:#FFFFFF;
+  --bg:#E4EDDF; --surface:#F7FAF3; --ink:#16244D; --muted:#55627F; --line:#C3D1C1;
+  --accent:#1E3FAE; --accent-ink:#FFFFFF;
+  --soil:#46372F; --soil-hi:#55443A; --frame:#2C231F; --zinc:#B4C2CE;
+  --enamel:#FDFEFB; --sign-ink:#1E3FAE; --ok:#2B8A57; --bad:#D4323F; --rust:#8B5A3A; --rust-ink:#F3DDC9;
+  --p2:#7DB1FF; --p3:#FF76B3; --p5:#FFD540; --p7:#FFF5E3; --leaf:#4FA865; --sun:#FFE27A;
+  --heart:#FFD84A; --heart5:#FF9B3D; --heart-ink:#3B2A05;
+  --display: ui-rounded, "SF Pro Rounded", "Arial Rounded MT Bold", "Nunito", system-ui, sans-serif;
+  --text: ui-rounded, "SF Pro Rounded", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    color-scheme: dark;
+    --bg:#0F1914; --surface:#18261E; --ink:#E8F0E6; --muted:#9BAEA1; --line:#2D3E34;
+    --accent:#A9C0FF; --accent-ink:#0E1A3D;
+    --soil:#3F3029; --soil-hi:#4D3C33; --frame:#251C19; --zinc:#8E9DAA;
+    --enamel:#EEF2E9; --sign-ink:#1B3899; --ok:#2F9460; --bad:#D9414D;
+    --bubble:#21402C; --bubble-ink:#E8F0E6; --card:#18261E;
+  }
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{
+  background:var(--bg); color:var(--ink);
+  font-family:var(--text); font-size:16px; line-height:1.45;
+  min-height:100vh; min-height:100dvh;
+  -webkit-text-size-adjust:100%; overflow-x:hidden;
+}
+button{font:inherit; color:inherit; cursor:pointer; touch-action:manipulation; -webkit-tap-highlight-color:transparent}
+:focus-visible{outline:3px solid var(--accent); outline-offset:2px}
+
+.app{max-width:568px; margin:0 auto; padding:14px 14px 36px}
+
+/* Kopf */
+.top{display:flex; align-items:center; gap:10px 14px; flex-wrap:wrap}
+.logo{display:flex; align-items:center; gap:8px; margin:0 auto 0 0; font-family:var(--display); font-weight:800; font-size:1.7rem; letter-spacing:-.01em; line-height:1}
+.logo svg{width:34px; height:34px; display:block}
+.modes{display:flex; background:var(--surface); border:1.5px solid var(--line); border-radius:999px; padding:3px}
+.modes button{border:0; background:none; border-radius:999px; padding:.42em 1em; font-weight:700; color:var(--muted)}
+.modes button[aria-selected="true"]{background:var(--accent); color:var(--accent-ink)}
+.quiet{border:0; background:none; padding:.4em .3em; font-weight:600; color:var(--muted); text-decoration:underline; text-decoration-color:var(--line); text-underline-offset:4px}
+.quiet:hover{color:var(--ink)}
+
+.meta{display:flex; align-items:flex-end; justify-content:space-between; gap:12px; margin:18px 0 10px}
+.meta h2{margin:0; font-family:var(--display); font-size:1.15rem; font-weight:800}
+.meta p{margin:2px 0 0; color:var(--muted); font-size:.92rem}
+.meta .right{text-align:right; flex:none}
+.meta .quiet{padding:0; font-size:.92rem}
+.clock{font-family:var(--display); font-weight:700; font-size:1.25rem; font-variant-numeric:tabular-nums; color:var(--muted)}
+
+.levels{display:flex; flex-wrap:wrap; gap:6px; margin:0 0 12px}
+.btn{border:1.5px solid var(--line); background:var(--surface); border-radius:999px; padding:.45em .95em; font-weight:700; font-size:.92rem}
+.btn:hover{border-color:var(--accent)}
+.btn[aria-pressed="true"], .btn.primary{background:var(--accent); color:var(--accent-ink); border-color:var(--accent)}
+.btn:disabled{opacity:.45; cursor:default}
+.btn:disabled:hover{border-color:var(--line)}
+.btn small{font-weight:600; opacity:.7; margin-left:.25em}
+
+/* Beet */
+.plot-wrap{display:flex; justify-content:center}
+.plot{
+  --cell:56px; --gap:4px; --pad:7px; --signw:58px;
+  display:grid; grid-template-columns:var(--signw) auto; gap:6px;
+}
+.corner{display:grid; place-items:center; color:var(--muted); font-family:var(--display); font-weight:800; font-size:1.2rem}
+.colsigns{display:grid; grid-auto-flow:column; grid-auto-columns:var(--cell); gap:var(--gap); padding:0 var(--pad)}
+.rowsigns{display:grid; grid-auto-rows:var(--cell); gap:var(--gap); padding:var(--pad) 0; align-items:center}
+.sign{
+  border:2px solid var(--enamel); background:var(--enamel); color:var(--sign-ink);
+  box-shadow:inset 0 0 0 1.5px var(--sign-ink), 0 1px 2px rgba(22,36,77,.25);
+  border-radius:9px; height:32px; padding:0; width:100%;
+  font-family:var(--display); font-weight:800; font-variant-numeric:tabular-nums;
+  font-size:clamp(11px, calc(var(--cell) * .26), 15px); line-height:1;
+  transition:background-color .2s, color .2s;
+}
+.sign.ok{background:var(--ok); border-color:var(--ok); color:#fff; box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.75)}
+.sign.bad{background:var(--bad); border-color:var(--bad); color:#fff; box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.75); animation:wackel .35s}
+.sign.rust{background:var(--rust) radial-gradient(circle at 22% 30%, rgba(0,0,0,.2) 0 3px, transparent 4px), radial-gradient(circle at 78% 72%, rgba(0,0,0,.16) 0 2px, transparent 3px); background-color:var(--rust); border-color:var(--rust); color:var(--rust-ink); box-shadow:inset 0 0 0 1.5px rgba(243,221,201,.3)}
+.sign.lit{outline:3px solid var(--sun); outline-offset:1px}
+
+.bed{
+  position:relative; display:grid; grid-template-columns:repeat(var(--C), var(--cell)); grid-auto-rows:var(--cell);
+  gap:var(--gap); padding:var(--pad); background:var(--frame); border-radius:16px;
+}
+.cell{
+  position:relative; border:0; padding:0; border-radius:9px; background:var(--soil);
+  background-image:radial-gradient(rgba(255,255,255,.05) 1px, transparent 1.4px); background-size:9px 9px;
+  display:grid; place-items:center;
+}
+@media (hover:hover){ .cell:not(.given):hover{background-color:var(--soil-hi)} }
+.cell:focus-visible{outline:3px solid var(--sun); outline-offset:1px; z-index:2}
+.cell.given{cursor:default}
+.cell.given::before{content:""; position:absolute; inset:2px; border-radius:50%; border:2px solid var(--zinc); opacity:.85}
+.cell.lit{box-shadow:0 0 0 2px var(--sun)}
+.cell.target{box-shadow:0 0 0 3px var(--sun); animation:puls 1s ease-in-out infinite}
+.cell.clash{box-shadow:inset 0 0 0 2px var(--bad)}
+.cell.wrong .fl{animation:wackel .4s 3}
+.cell.bump{animation:wackel .3s}
+
+.fl{width:88%; height:88%; display:block; transition:transform .25s, filter .25s; animation:wachs .3s cubic-bezier(.3,1.7,.5,1) backwards}
+.bed.fresh .fl{animation-delay:var(--d, 0s)}
+.fl .lv{fill:var(--leaf)}
+.fl .ey{fill:rgba(40,20,0,.16)}
+.fl .ct{fill:var(--heart)}
+.fl .nm{font-family:var(--display); font-weight:800; font-size:21px; fill:var(--heart-ink)}
+.fl2 .pt{fill:var(--p2)} .fl3 .pt{fill:var(--p3)} .fl5 .pt{fill:var(--p5)} .fl7 .pt{fill:var(--p7)}
+.fl5 .ct{fill:var(--heart5)}
+.cell.clash .fl{transform:rotate(16deg) scale(.86); filter:saturate(.35) brightness(.8)}
+.bed.won .fl{animation:tanz .8s ease-in-out 2; animation-delay:var(--w, 0s)}
+
+.notes{display:grid; grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr; width:100%; height:100%; padding:10%}
+.notes i{display:grid; place-items:center; font-style:normal; font-family:var(--display); font-weight:800; font-size:calc(var(--cell) * .25); line-height:1}
+.notes .off{visibility:hidden}
+.n2{color:var(--p2)} .n3{color:var(--p3)} .n5{color:var(--p5)} .n7{color:var(--p7)}
+
+.bee{position:absolute; width:42px; left:-12%; top:60%; pointer-events:none; z-index:5; animation:flug 3.4s ease-in-out forwards}
+.bee svg{display:block; width:100%; animation:schaukel .45s ease-in-out infinite alternate}
+
+/* Werkzeug */
+.say[hidden]{display:none}
+.say{min-height:3em; margin:14px 2px 6px; text-align:center; color:var(--ink); font-size:.98rem}
+.say b{font-family:var(--display); font-variant-numeric:tabular-nums}
+.palette{display:flex; justify-content:center; align-items:center; gap:8px; flex-wrap:wrap}
+.pot{
+  width:54px; height:54px; border-radius:50%; border:3px solid transparent; background:var(--soil); padding:1px;
+  display:grid; place-items:center; transition:transform .15s;
+}
+.pot .fl{animation:none}
+.pot[aria-pressed="true"]{border-color:var(--accent); transform:translateY(-4px); box-shadow:0 5px 0 -1px var(--line)}
+.pot.empty{color:var(--zinc); font-family:var(--display); font-weight:800; font-size:1.3rem}
+.actions{display:flex; justify-content:center; gap:8px; margin-top:12px; flex-wrap:wrap}
+
+.win{margin-top:20px; text-align:center}
+.win h2{font-family:var(--display); font-weight:800; font-size:1.6rem; margin:0 0 4px}
+.win p{margin:0 auto 12px; max-width:34em; color:var(--muted)}
+.win .actions{margin-top:0}
+
+.foot{margin-top:26px; text-align:center; color:var(--muted); font-size:.85rem}
+
+/* Regeln */
+dialog{border:0; border-radius:18px; padding:0; max-width:min(560px, calc(100vw - 24px)); background:var(--surface); color:var(--ink); box-shadow:0 20px 60px rgba(0,0,0,.35)}
+dialog::backdrop{background:rgba(10,20,15,.55)}
+.help{padding:22px 22px 18px}
+.help h2{font-family:var(--display); font-weight:800; font-size:1.4rem; margin:0 0 10px; outline:none}
+.help h3{font-family:var(--display); font-weight:800; font-size:1rem; margin:18px 0 4px}
+.help p{margin:0 0 8px}
+.help ol{margin:0 0 8px; padding-left:1.3em}
+.help li{margin-bottom:6px}
+.demo{display:flex; align-items:center; gap:8px; margin:12px 0; padding:10px; background:var(--frame); border-radius:14px; width:max-content; max-width:100%}
+.demo .sign{width:52px; flex:none; font-size:15px}
+.demo .cell{width:46px; height:46px; flex:none; cursor:default}
+.demo .fl{animation:none}
+/* Teilen */
+.sharedlg{padding:22px 22px 16px; width:min(400px, calc(100vw - 24px)); text-align:center}
+.sharedlg h2{font-family:var(--display); font-weight:800; font-size:1.45rem; margin:0 0 4px; outline:none}
+.sharedlg .sum{margin:0 0 16px; color:var(--muted)}
+.bubble{position:relative; margin:0 auto 18px; max-width:300px; text-align:left; background:var(--bubble); color:var(--bubble-ink); border-radius:16px 16px 4px 16px; padding:10px 10px 8px}
+.bubble::after{content:""; position:absolute; right:-7px; bottom:0; border:8px solid transparent; border-left-color:var(--bubble); border-bottom-color:var(--bubble); border-radius:0 0 4px 0}
+.bubble pre{margin:0 2px 8px; font:inherit; font-size:.95rem; line-height:1.3; white-space:pre-wrap; word-break:break-word; user-select:all}
+.bubble .grid{letter-spacing:1px; line-height:1.15}
+.bubble .url{color:var(--accent); text-decoration:underline}
+.lp{display:flex; gap:10px; align-items:center; background:var(--card); border-radius:10px; padding:8px; color:var(--ink)}
+.lp svg{width:46px; height:46px; flex:none; display:block}
+.lp b{display:block; font-family:var(--display); font-size:.95rem}
+.lp span{display:block; font-size:.8rem; line-height:1.3; color:var(--muted)}
+.sharedlg .actions{margin-top:0}
+.sharedlg .note{margin:12px 0 0; color:var(--muted); font-size:.9rem; min-height:1.3em}
+.sharedlg .close{margin-top:6px}
+kbd{font:inherit; font-weight:700; border:1.5px solid var(--line); border-bottom-width:3px; border-radius:6px; padding:0 .35em; background:var(--bg)}
+.help .close{margin-top:10px}
+
+@keyframes wachs{from{transform:scale(0) rotate(-50deg)} to{transform:none}}
+@keyframes tanz{0%,100%{transform:none} 30%{transform:scale(1.18) rotate(22deg)} 65%{transform:scale(.94) rotate(-14deg)}}
+@keyframes wackel{0%,100%{transform:translateX(0)} 25%{transform:translateX(-3px) rotate(-4deg)} 75%{transform:translateX(3px) rotate(4deg)}}
+@keyframes puls{50%{box-shadow:0 0 0 6px rgba(255,226,122,.35)}}
+@keyframes flug{0%{left:-12%; top:62%} 22%{left:22%; top:16%} 45%{left:46%; top:58%} 70%{left:74%; top:20%} 100%{left:112%; top:38%}}
+@keyframes schaukel{from{transform:rotate(-12deg) translateY(-2px)} to{transform:rotate(10deg) translateY(2px)}}
+
+@media (max-width:420px){
+  .app{padding:10px 10px 30px}
+  .logo{font-size:1.45rem}
+  .logo svg{width:30px; height:30px}
+  .pot{width:48px; height:48px}
+  .levels{gap:5px}
+  .levels .btn{padding:.36em .7em; font-size:.82rem}
+  .levels small{display:none}
+  .meta{margin:14px 0 8px}
+  .say{margin-top:10px}
+  .sign{height:28px; border-radius:8px}
+}
+@media (prefers-reduced-motion: reduce){
+  *, *::before, *::after{animation:none !important; transition:none !important}
+  .bee{display:none}
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="top">
+    <h1 class="logo"><span id="logoMark"></span>Primeln</h1>
+    <div class="modes" role="tablist" aria-label="Spielmodus">
+      <button role="tab" id="tabTag" aria-selected="true">Tagesbeet</button>
+      <button role="tab" id="tabEndlos" aria-selected="false">Endlos</button>
+    </div>
+    <button class="quiet" id="btnHelp">Regeln</button>
+    <button class="quiet" id="btnSound" aria-pressed="false">Ton aus</button>
+  </header>
+
+  <section class="meta" aria-live="off">
+    <div><h2 id="title"></h2><p id="sub"></p></div>
+    <div class="right">
+      <div class="clock" id="clock" role="timer" aria-label="Zeit">0:00</div>
+      <button class="quiet" id="btnNew" hidden>Neues Beet</button>
+    </div>
+  </section>
+
+  <div class="levels" id="levels" hidden></div>
+
+  <main>
+    <div class="plot-wrap" id="plotWrap">
+      <div class="plot" id="plot">
+        <div class="corner" aria-hidden="true" title="Die Schilder zeigen Produkte">×</div>
+        <div class="colsigns" id="colsigns"></div>
+        <div class="rowsigns" id="rowsigns"></div>
+        <div class="bed" id="bed"></div>
+      </div>
+    </div>
+
+    <p class="say" id="say" aria-live="polite"></p>
+
+    <div id="tools">
+      <div class="palette" id="palette" role="group" aria-label="Primel wählen"></div>
+      <div class="actions">
+        <button class="btn" id="btnNote" aria-pressed="false" title="Taste N">Notizen</button>
+        <button class="btn" id="btnUndo" title="Taste Z">Zurück</button>
+        <button class="btn" id="btnHint" title="Taste T">Tipp</button>
+      </div>
+    </div>
+
+    <section class="win" id="win" hidden>
+      <h2>Alles blüht.</h2>
+      <p id="winText"></p>
+      <div class="actions" id="winActions"></div>
+    </section>
+  </main>
+
+  <p class="foot">Läuft komplett in deinem Browser. Dein Spiel bleibt auf deinem Gerät.</p>
+</div>
+
+<dialog id="help" aria-labelledby="helpTitle">
+  <div class="help">
+    <h2 id="helpTitle" tabindex="-1">So wächst ein Beet</h2>
+    <ol>
+      <li>Auf jedes Feld gehört eine Primel. Ihre Blütenblätter zählen eine Primzahl: 2, 3, 5 oder 7.</li>
+      <li>Jedes Schild nennt das <strong>Produkt</strong> aller Primeln in seiner Reihe oder Spalte.</li>
+      <li>Gleiche Primeln stehen nie direkt nebeneinander, weder waagerecht noch senkrecht.</li>
+    </ol>
+    <div class="demo" id="demo" aria-label="Beispiel: Schild 84, darin die Primeln 2, 7, 2 und 3"></div>
+    <p>84 = 2 · 2 · 3 · 7. In dieser Reihe stehen also zwei Zweier, ein Dreier und ein Siebener. Das Schild verrät, <em>welche</em> Primeln es sind, aber nicht, <em>wo</em> sie stehen.</p>
+    <p>Primeln im Zinktopf standen schon da. Verwitterte Schilder mit Fragezeichen verraten nichts. Jedes Beet hat genau eine Lösung und lässt sich ohne Raten lösen.</p>
+
+    <h3>Bedienung</h3>
+    <p>Unten eine Primel wählen, dann Felder antippen. Nochmal antippen nimmt sie wieder heraus. Ein Tipp auf ein Schild zerlegt die Zahl, falls das Kopfrechnen hakt.</p>
+    <p>Tastatur: Pfeiltasten bewegen, <kbd>2</kbd> <kbd>3</kbd> <kbd>5</kbd> <kbd>7</kbd> pflanzen, <kbd>Entf</kbd> leert, <kbd>N</kbd> schaltet Notizen, <kbd>Z</kbd> nimmt zurück, <kbd>T</kbd> gibt einen Tipp.</p>
+
+    <h3>Warum das funktioniert</h3>
+    <p>Jede natürliche Zahl größer als 1 lässt sich auf genau eine Weise in Primfaktoren zerlegen. Das ist der Fundamentalsatz der Arithmetik, und er macht aus jedem Schild eine eindeutige Zutatenliste. Bei eingeschaltetem Ton klingt jede Primel übrigens als der Oberton, den ihre Zahl benennt.</p>
+
+    <h3>Tagesbeet und Endlos</h3>
+    <p>Das Tagesbeet entsteht allein aus dem Datum und ist deshalb an einem Kalendertag für alle gleich. Von Montag bis Sonntag wird es schwerer. Im Endlosmodus wächst auf Knopfdruck immer ein neues Beet in der Stufe deiner Wahl.</p>
+    <button class="btn primary close" id="helpClose">Los geht's</button>
+  </div>
+</dialog>
+
+<dialog id="share" aria-labelledby="shareTitle">
+  <div class="sharedlg">
+    <h2 id="shareTitle" tabindex="-1">Alles blüht.</h2>
+    <p class="sum" id="shareSum"></p>
+    <div class="bubble" aria-label="So sieht die Nachricht aus">
+      <pre id="sharePre"></pre>
+      <div class="lp" aria-hidden="true"><span id="lpMark"></span><div><b>Primeln</b><span>Das tägliche Rätselbeet aus Primzahlen</span><span>primeln.thssn.dev</span></div></div>
+    </div>
+    <div class="actions">
+      <button class="btn primary" id="btnShare" hidden>Teilen</button>
+      <button class="btn" id="btnCopy">Text kopieren</button>
+    </div>
+    <p class="note" id="shareNote" aria-live="polite"></p>
+    <button class="quiet close" id="shareClose">Schließen</button>
+  </div>
+</dialog>
+
+<noscript><p style="text-align:center">Primeln braucht JavaScript. Es läuft dabei alles lokal.</p></noscript>
+
+<script>
+(function () {
+'use strict';
+
+/* ===== Kernlogik: Zufall, Generator, Löser, Tipps (ohne DOM) ===== */
+const PRIMES = [2, 3, 5, 7];
+
+/* Deterministischer Zufall: gleicher Text -> gleiche Zahlenfolge, in jedem Browser. */
+function hashText(s) {
+  let h = 2166136261 >>> 0;
+  for (let i = 0; i < s.length; i++) {
+    h ^= s.charCodeAt(i);
+    h = Math.imul(h, 16777619) >>> 0;
+  }
+  return h >>> 0;
+}
+function makeRng(seedText) {
+  let a = hashText(seedText) || 1;
+  const next = function () {
+    a = (a + 0x6d2b79f5) >>> 0;
+    let t = a;
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+  for (let i = 0; i < 8; i++) next();
+  return {
+    next,
+    int: (n) => Math.floor(next() * n),
+    shuffle(arr) {
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(next() * (i + 1));
+        const t = arr[i]; arr[i] = arr[j]; arr[j] = t;
+      }
+      return arr;
+    },
+  };
+}
+
+/* Schwierigkeitsstufen. tier = stärkste Schlussregel, die zum Lösen nötig sein darf:
+   1 = Abzählen, 2 = "wohin passen alle 7er dieser Reihe?", 3 = ganze Reihe durchdenken. */
+const PRESETS = {
+  setzling:  { id: 'setzling',  name: 'Setzling',  R: 4, C: 4, K: 3, tier: 1, minTier: 1, hidden: 0, minGivens: 5 },
+  staude:    { id: 'staude',    name: 'Staude',    R: 5, C: 5, K: 4, tier: 1, minTier: 1, hidden: 0, minGivens: 7 },
+  wildwuchs: { id: 'wildwuchs', name: 'Wildwuchs', R: 5, C: 5, K: 4, tier: 2, minTier: 2, hidden: 0, minGivens: 0, softStart: true },
+  dschungel: { id: 'dschungel', name: 'Dschungel', R: 6, C: 6, K: 4, tier: 3, minTier: 2, hidden: 3, minGivens: 0 },
+};
+const PRESET_ORDER = ['setzling', 'staude', 'wildwuchs', 'dschungel'];
+
+function lineCells(p, isRow, i) {
+  const out = [];
+  if (isRow) for (let c = 0; c < p.C; c++) out.push(i * p.C + c);
+  else for (let r = 0; r < p.R; r++) out.push(r * p.C + i);
+  return out;
+}
+function allLines(p) {
+  if (p._lines) return p._lines;
+  const L = [];
+  for (let r = 0; r < p.R; r++) L.push({ isRow: true, i: r, cells: lineCells(p, true, r), cnt: p.rowCnt[r] });
+  for (let c = 0; c < p.C; c++) L.push({ isRow: false, i: c, cells: lineCells(p, false, c), cnt: p.colCnt[c] });
+  p._lines = L;
+  return L;
+}
+function neighbours(p, idx) {
+  const r = Math.floor(idx / p.C), c = idx % p.C, out = [];
+  if (r > 0) out.push(idx - p.C);
+  if (r < p.R - 1) out.push(idx + p.C);
+  if (c > 0) out.push(idx - 1);
+  if (c < p.C - 1) out.push(idx + 1);
+  return out;
+}
+const isSingle = (m) => m !== 0 && (m & (m - 1)) === 0;
+const bitIndex = (m) => (m === 1 ? 0 : m === 2 ? 1 : m === 4 ? 2 : 3);
+
+/* Alle gültigen Belegungen einer Reihe; liefert pro Feld die noch möglichen Primeln. */
+function enumLine(cells, cand, cnt, K) {
+  const n = cells.length, out = new Array(n).fill(0), cur = new Array(n);
+  const rem = cnt ? cnt.slice() : null;
+  let any = false;
+  (function rec(i, prev) {
+    if (i === n) { any = true; for (let j = 0; j < n; j++) out[j] |= 1 << cur[j]; return; }
+    const m = cand[cells[i]];
+    for (let k = 0; k < K; k++) {
+      if (!((m >> k) & 1) || k === prev) continue;
+      if (rem) { if (rem[k] === 0) continue; rem[k]--; }
+      cur[i] = k; rec(i + 1, k);
+      if (rem) rem[k]++;
+    }
+  })(0, -1);
+  return any ? out : null;
+}
+
+/* Nur eine Primelsorte betrachten: wohin können ihre `need` Exemplare in der Reihe? */
+function enumPlacement(cells, cand, k, need) {
+  const n = cells.length, bit = 1 << k;
+  let union = 0, inter = (1 << n) - 1, any = false;
+  (function rec(i, chosen, left, prevChosen) {
+    if (i === n) { if (left === 0) { any = true; union |= chosen; inter &= chosen; } return; }
+    if (n - i < left) return;
+    const m = cand[cells[i]];
+    if ((m & bit) && left > 0 && !prevChosen) rec(i + 1, chosen | (1 << i), left - 1, true);
+    if (m !== bit) rec(i + 1, chosen, left, false);
+  })(0, 0, need, false);
+  return any ? { union, inter } : null;
+}
+
+/* Ein Durchgang Schlussregeln. Liefert false bei Widerspruch.
+   onFix(idx, grund) wird für jedes neu festgelegte Feld aufgerufen. */
+function propagate(p, cand, tier, onFix) {
+  const K = p.K, N = p.R * p.C, lines = allLines(p);
+  const setCand = (idx, m, why) => {
+    if (m === cand[idx]) return true;
+    if (m === 0) return false;
+    const was = isSingle(cand[idx]);
+    cand[idx] = m; dirty = true;
+    if (!was && isSingle(m) && onFix) onFix(idx, why);
+    return true;
+  };
+  let dirty = false;
+  for (let guard = 0; guard < 2000; guard++) {
+    dirty = false;
+
+    // Regel: gleiche Primeln nie direkt nebeneinander
+    for (let idx = 0; idx < N; idx++) {
+      const m = cand[idx];
+      if (m === 0) return false;
+      if (!isSingle(m)) continue;
+      for (const nb of neighbours(p, idx)) {
+        if (cand[nb] & m) { if (!setCand(nb, cand[nb] & ~m, { rule: 'nachbar', cell: idx })) return false; }
+      }
+    }
+    // Regel: Abzählen in Reihen mit lesbarem Schild
+    for (const ln of lines) {
+      if (!ln.cnt) continue;
+      for (let k = 0; k < K; k++) {
+        const bit = 1 << k, need = ln.cnt[k];
+        let fixed = 0, poss = 0;
+        for (const idx of ln.cells) { if (cand[idx] === bit) fixed++; if (cand[idx] & bit) poss++; }
+        if (fixed > need || poss < need) return false;
+        if (fixed === need && poss > need) {
+          for (const idx of ln.cells) if (cand[idx] !== bit && (cand[idx] & bit)) {
+            if (!setCand(idx, cand[idx] & ~bit, { rule: 'voll', line: ln, k })) return false;
+          }
+        } else if (poss === need && fixed < need) {
+          for (const idx of ln.cells) if ((cand[idx] & bit) && cand[idx] !== bit) {
+            if (!setCand(idx, bit, { rule: 'platz', line: ln, k })) return false;
+          }
+        }
+      }
+    }
+    if (dirty) continue;
+
+    if (tier >= 2) {
+      for (const ln of lines) {
+        if (!ln.cnt) continue;
+        for (let k = 0; k < K; k++) {
+          const bit = 1 << k;
+          const res = enumPlacement(ln.cells, cand, k, ln.cnt[k]);
+          if (!res) return false;
+          let avail = 0;
+          for (let j = 0; j < ln.cells.length; j++) if (cand[ln.cells[j]] & bit) avail |= 1 << j;
+          for (let j = 0; j < ln.cells.length; j++) {
+            const idx = ln.cells[j];
+            if ((res.inter >> j) & 1) { if (!setCand(idx, bit, { rule: 'abstand', line: ln, k, union: res.union, inter: res.inter, avail })) return false; }
+            else if (!((res.union >> j) & 1) && (cand[idx] & bit)) {
+              if (!setCand(idx, cand[idx] & ~bit, { rule: 'abstand', line: ln, k, union: res.union, inter: res.inter, avail })) return false;
+            }
+          }
+        }
+        if (dirty) break;
+      }
+      if (dirty) continue;
+    }
+    if (tier >= 3) {
+      for (const ln of lines) {
+        const res = enumLine(ln.cells, cand, ln.cnt, K);
+        if (!res) return false;
+        for (let j = 0; j < ln.cells.length; j++) {
+          const idx = ln.cells[j];
+          if (!setCand(idx, cand[idx] & res[j], { rule: 'reihe', line: ln })) return false;
+        }
+        if (dirty) break;
+      }
+      if (dirty) continue;
+    }
+    break;
+  }
+  return true;
+}
+
+function startCands(p, values) {
+  const full = (1 << p.K) - 1, N = p.R * p.C, cand = new Array(N);
+  for (let i = 0; i < N; i++) cand[i] = values[i] >= 0 ? 1 << values[i] : full;
+  return cand;
+}
+function givenValues(p) {
+  const v = new Array(p.R * p.C);
+  for (let i = 0; i < v.length; i++) v[i] = p.given[i] ? p.sol[i] : -1;
+  return v;
+}
+function solvesWith(p, tier) {
+  const cand = startCands(p, givenValues(p));
+  if (!propagate(p, cand, tier)) return false;
+  for (let i = 0; i < cand.length; i++) if (!isSingle(cand[i])) return false;
+  return true;
+}
+
+function randomSolution(rng, R, C, K) {
+  const sol = new Array(R * C);
+  for (let idx = 0; idx < R * C; idx++) {
+    const r = Math.floor(idx / C), c = idx % C, opts = [];
+    for (let k = 0; k < K; k++) {
+      if (c > 0 && sol[idx - 1] === k) continue;
+      if (r > 0 && sol[idx - C] === k) continue;
+      opts.push(k);
+    }
+    sol[idx] = opts[rng.int(opts.length)];
+  }
+  return sol;
+}
+
+function buildPuzzle(rng, cfg) {
+  const { R, C, K } = cfg, N = R * C;
+  let sol;
+  for (let t = 0; t < 50; t++) {
+    sol = randomSolution(rng, R, C, K);
+    const seen = new Array(K).fill(0);
+    for (const k of sol) seen[k]++;
+    if (seen.every((n) => n >= 2)) break;
+  }
+  const count = (cells) => { const a = new Array(K).fill(0); for (const i of cells) a[sol[i]]++; return a; };
+  const p = { R, C, K, sol, given: new Array(N).fill(1), rowCnt: [], colCnt: [] };
+  for (let r = 0; r < R; r++) p.rowCnt.push(count(lineCells(p, true, r)));
+  for (let c = 0; c < C; c++) p.colCnt.push(count(lineCells(p, false, c)));
+  // verwitterte Schilder
+  if (cfg.hidden > 0) {
+    const ids = rng.shuffle([...Array(R + C).keys()]).slice(0, cfg.hidden);
+    for (const id of ids) { if (id < R) p.rowCnt[id] = null; else p.colCnt[id - R] = null; }
+  }
+  const order = rng.shuffle([...Array(N).keys()]);
+  for (const idx of order) {
+    p.given[idx] = 0;
+    if (!solvesWith(p, cfg.tier)) p.given[idx] = 1;
+  }
+  // leichte Stufen: so viele Primeln vorpflanzen, bis die Mindestzahl erreicht ist
+  let have = p.given.reduce((a, b) => a + b, 0);
+  if (have < cfg.minGivens) {
+    const free = rng.shuffle(order.filter((i) => !p.given[i]));
+    for (let i = 0; have < cfg.minGivens && i < free.length; i++, have++) p.given[free[i]] = 1;
+  }
+  return p;
+}
+
+/* Wie viele Felder lassen sich gleich zu Beginn allein durch Abzählen sicher bestimmen? */
+function openingCount(p) {
+  const cand = startCands(p, givenValues(p));
+  propagate(p, cand, 1);
+  let n = 0;
+  for (let i = 0; i < cand.length; i++) if (!p.given[i] && isSingle(cand[i])) n++;
+  return n;
+}
+/* Sanfter Einstieg: eine zusätzliche Vorgabe, nach der man sofort mit Abzählen loslegen kann,
+   ohne dass das Beet dadurch komplett ohne die schwerere Regel lösbar wird. */
+function softenStart(p, rng) {
+  if (openingCount(p) >= 2) return;
+  const free = rng.shuffle(p.given.map((g, i) => (g ? -1 : i)).filter((i) => i >= 0));
+  let fallback = -1;
+  for (const idx of free) {
+    p.given[idx] = 1;
+    if (!solvesWith(p, 1)) {
+      const n = openingCount(p);
+      if (n >= 2) return;
+      if (n >= 1 && fallback < 0) fallback = idx;
+    }
+    p.given[idx] = 0;
+  }
+  if (fallback >= 0) p.given[fallback] = 1;
+}
+
+/* gen = Generator-Version. 1 = Stand bis 12.11.2026, 2 = mit sanftem Einstieg.
+   Alte Versionen bleiben erhalten, damit gespeicherte Beete gleich bleiben. */
+const GEN = 2;
+function generate(seedText, presetId, gen) {
+  gen = gen || GEN;
+  const cfg = PRESETS[presetId];
+  const rng = makeRng('primeln/' + presetId + '/' + seedText);
+  let best = null;
+  for (let attempt = 0; attempt < 12; attempt++) {
+    const p = buildPuzzle(rng, cfg);
+    const givens = p.given.reduce((a, b) => a + b, 0);
+    const tooEasy = cfg.minTier > 1 && solvesWith(p, cfg.minTier - 1);
+    const score = (tooEasy ? 1000 : 0) + givens;
+    if (!best || score < best.score) best = { p, score };
+    if (!tooEasy && givens <= Math.max(cfg.minGivens, Math.ceil(cfg.R * cfg.C * 0.25))) break;
+  }
+  const p = best.p;
+  if (gen >= 2 && cfg.softStart) softenStart(p, rng);
+  p.gen = gen;
+  p.preset = presetId;
+  p.seed = seedText;
+  p.rowProd = p.rowCnt.map((c) => (c ? prodOf(c) : null));
+  p.colProd = p.colCnt.map((c) => (c ? prodOf(c) : null));
+  return p;
+}
+function prodOf(cnt) {
+  let x = 1;
+  for (let k = 0; k < cnt.length; k++) for (let j = 0; j < cnt[k]; j++) x *= PRIMES[k];
+  return x;
+}
+
+/* Nächster logischer Schritt aus Sicht des Spielstands (values: -1 = leer). */
+function nextStep(p, values) {
+  const cand = startCands(p, values);
+  for (let tier = 1; tier <= 3; tier++) {
+    const c = cand.slice();
+    let found = null;
+    const ok = propagate(p, c, tier, (idx, why) => { if (!found && values[idx] < 0) found = { idx, why, k: -1 }; });
+    if (!ok) return null;
+    if (found) { found.k = p.sol[found.idx]; found.tier = tier; return found; }
+  }
+  return null;
+}
+
+
+/* ===== Marke: das Beet-Logo (vier Primeln 2, 3, 5, 7 auf 2×2 Feldern) ===== */
+const BRAND = {
+  url: 'https://primeln.thssn.dev',
+  domain: 'primeln.thssn.dev',
+  claim: 'Das tägliche Rätselbeet aus Primzahlen',
+  frame: '#2C231F', soil: '#46372F', leaf: '#4FA865', ink: '#3B2A05',
+  petal: ['#7DB1FF', '#FF76B3', '#FFD540', '#FFF5E3'],
+  heart: ['#FFD84A', '#FFD84A', '#FF9B3D', '#FFD84A'],
+};
+const BRAND_PETAL = 'M0 -6C-13 -12 -17 -30 -8 -38Q-3 -42 0 -35Q3 -42 8 -38C17 -30 13 -12 0 -6Z';
+const BRAND_PW = [1.55, 1.42, 1.04, 0.76], BRAND_LW = [13, 12, 8, 6], BRAND_N = [2, 3, 5, 7];
+
+/* Eine Primel als <g>, Mittelpunkt (x, y), s = Maßstab (1 = 100 Einheiten Durchmesser). */
+function brandFlower(k, x, y, s, opt) {
+  opt = opt || {};
+  const n = BRAND_N[k], step = 360 / n;
+  let g = '<g transform="translate(' + x + ' ' + y + ') scale(' + s + ')' + (opt.rot ? ' rotate(' + opt.rot + ')' : '') + '">';
+  if (opt.leaves !== false) {
+    g += '<g fill="' + BRAND.leaf + '">';
+    for (let i = 0; i < n; i++) g += '<ellipse cx="0" cy="-29" rx="' + BRAND_LW[k] + '" ry="17" transform="rotate(' + (step * (i + 0.5)).toFixed(2) + ')"/>';
+    g += '</g>';
+  }
+  g += '<g fill="' + BRAND.petal[k] + '">';
+  for (let i = 0; i < n; i++) g += '<path d="' + BRAND_PETAL + '" transform="rotate(' + (step * i).toFixed(2) + ') scale(' + BRAND_PW[k] + ' 1)"/>';
+  g += '</g>';
+  if (opt.leaves !== false) g += '<circle r="17" fill="rgba(40,20,0,.16)"/>';
+  g += '<circle r="13.5" fill="' + BRAND.heart[k] + '"/>';
+  if (opt.numbers) g += '<text y="7.4" text-anchor="middle" font-family="ui-rounded,\'SF Pro Rounded\',\'Inter Display\',system-ui,sans-serif" font-weight="800" font-size="21" fill="' + BRAND.ink + '">' + n + '</text>';
+  return g + '</g>';
+}
+
+/* Logo. variant: 'round' = runde Ecken, transparent drumherum (Favicon, Kopfzeile)
+                  'full'  = randlos quadratisch für App-Icons; inset = Anteil der Fläche fürs Beet */
+function brandMark(opt) {
+  opt = opt || {};
+  const variant = opt.variant || 'round', small = !!opt.small;
+  const inset = variant === 'full' ? (opt.inset || 0.8) : 1;
+  const size = 100 * inset, o = (100 - size) / 2;
+  const pad = size * (small ? 0.08 : 0.09), gap = size * (small ? 0.06 : 0.05), cell = (size - 2 * pad - gap) / 2;
+  let s = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"' + (opt.attrs ? ' ' + opt.attrs : '') + '>';
+  if (variant === 'full') s += '<rect width="100" height="100" fill="' + BRAND.frame + '"/>';
+  else s += '<rect width="100" height="100" rx="22" fill="' + BRAND.frame + '"/>';
+  const order = [0, 1, 2, 3]; // 2 3 / 5 7: keine gleichen Nachbarn
+  order.forEach((k, i) => {
+    const x = o + pad + (i % 2) * (cell + gap), y = o + pad + Math.floor(i / 2) * (cell + gap);
+    s += '<rect x="' + x.toFixed(2) + '" y="' + y.toFixed(2) + '" width="' + cell.toFixed(2) + '" height="' + cell.toFixed(2) + '" rx="' + (cell * 0.22).toFixed(2) + '" fill="' + BRAND.soil + '"/>';
+    s += brandFlower(k, +(x + cell / 2).toFixed(2), +(y + cell / 2).toFixed(2), +(cell / 100 * (small ? 1.02 : 0.94)).toFixed(4), { leaves: !small, numbers: !!opt.numbers });
+  });
+  return s + '</svg>';
+}
+
+
+/* ===== Spielstände =====
+   Hier bleiben sie nur im Arbeitsspeicher und sind nach dem Neuladen weg.
+   Für dauerhafte Stände im eigenen Browser diese zwei Funktionen ersetzen durch:
+     lesen:     (k) => localStorage.getItem(k),
+     schreiben: (k, v) => localStorage.setItem(k, v),
+   Auch dann verlässt nichts den Rechner. */
+const Speicher = (() => {
+  const m = new Map();
+  return {
+    lesen: (k) => (m.has(k) ? m.get(k) : null),
+    schreiben: (k, v) => { m.set(k, v); },
+  };
+})();
+const lade = (k, fallback) => { try { const r = Speicher.lesen(k); return r == null ? fallback : JSON.parse(r); } catch (e) { return fallback; } };
+const sichere = (k, v) => { try { Speicher.schreiben(k, JSON.stringify(v)); } catch (e) { /* voll oder gesperrt: dann eben ohne */ } };
+
+/* ===== Hilfen ===== */
+const $ = (s) => document.querySelector(s);
+const el = (tag, cls, html) => { const e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; };
+const pad2 = (n) => String(n).padStart(2, '0');
+const fmtTime = (ms) => { const s = Math.floor(ms / 1000); return Math.floor(s / 60) + ':' + pad2(s % 60); };
+const fmtNum = (n) => String(n).replace(/\B(?=(\d{3})+$)/g, '\u202F');
+
+const PETAL = 'M0 -6C-13 -12 -17 -30 -8 -38Q-3 -42 0 -35Q3 -42 8 -38C17 -30 13 -12 0 -6Z';
+const PETAL_W = [1.55, 1.42, 1.04, 0.76];
+const LEAF_W = [13, 12, 8, 6];
+function flowerSVG(k) {
+  const n = PRIMES[k], step = 360 / n;
+  let petals = '', leaves = '';
+  for (let i = 0; i < n; i++) {
+    petals += '<path d="' + PETAL + '" transform="rotate(' + (step * i).toFixed(2) + ') scale(' + PETAL_W[k] + ' 1)"/>';
+    leaves += '<ellipse cx="0" cy="-29" rx="' + LEAF_W[k] + '" ry="17" transform="rotate(' + (step * (i + 0.5)).toFixed(2) + ')"/>';
+  }
+  return '<svg class="fl fl' + n + '" viewBox="-50 -50 100 100" aria-hidden="true"><g class="lv">' + leaves +
+    '</g><g class="pt">' + petals + '</g><circle class="ey" r="17"/><circle class="ct" r="13.5"/>' +
+    '<text class="nm" y="7.4" text-anchor="middle">' + n + '</text></svg>';
+}
+function notesHTML(mask, K) {
+  if (!mask) return '';
+  let s = '<span class="notes">';
+  for (let k = 0; k < K; k++) s += '<i class="n' + PRIMES[k] + ((mask >> k) & 1 ? '' : ' off') + '">' + PRIMES[k] + '</i>';
+  return s + '</span>';
+}
+const BEE = '<svg viewBox="0 0 40 28" aria-hidden="true"><ellipse cx="15" cy="8" rx="7" ry="5" fill="#fff" opacity=".85"/><ellipse cx="23" cy="7" rx="7" ry="5" fill="#fff" opacity=".85"/><ellipse cx="20" cy="17" rx="12" ry="8" fill="#FFD540"/><path d="M15 10.5v13M21 9.2v15.6M27 11.5v11" stroke="#2C231F" stroke-width="3"/><circle cx="30.5" cy="15.5" r="1.4" fill="#2C231F"/></svg>';
+
+/* ===== Datum und Tagesbeet ===== */
+const EPOCH = Date.UTC(2026, 10, 11); // Tagesbeet Nr. 1
+const DAY_PRESET = ['dschungel', 'staude', 'staude', 'wildwuchs', 'wildwuchs', 'wildwuchs', 'dschungel']; // So … Sa
+function today() {
+  const d = new Date();
+  const y = d.getFullYear(), m = d.getMonth(), t = d.getDate();
+  return {
+    key: y + '-' + pad2(m + 1) + '-' + pad2(t),
+    nr: Math.round((Date.UTC(y, m, t) - EPOCH) / 86400000) + 1,
+    preset: DAY_PRESET[d.getDay()],
+    gen: (y + '-' + pad2(m + 1) + '-' + pad2(t)) >= '2026-11-13' ? 2 : 1, // ältere Tagesbeete bleiben, wie sie waren
+    text: d.toLocaleDateString('de-DE', { weekday: 'long', day: 'numeric', month: 'long' }),
+    kurz: t + '.' + (m + 1) + '.' + y,
+  };
+}
+function shiftKey(key, days) {
+  const [y, m, d] = key.split('-').map(Number);
+  const x = new Date(Date.UTC(y, m - 1, d) + days * 86400000);
+  return x.getUTCFullYear() + '-' + pad2(x.getUTCMonth() + 1) + '-' + pad2(x.getUTCDate());
+}
+
+/* ===== Zustand ===== */
+const settings = lade('primeln.einstellungen', { ton: false, stufe: 'staude' });
+const state = { mode: 'tag', games: { tag: null, endlos: null }, tool: 0, noteMode: false };
+let cellEls = [], signEls = [];
+const cur = () => state.games[state.mode];
+
+function makeGame(storeKey, seed, presetId, info, gen) {
+  const p = generate(seed, presetId, gen), N = p.R * p.C;
+  const g = {
+    p, storeKey, seed, presetId, info, gen,
+    values: givenValues(p), notes: new Array(N).fill(0),
+    elapsed: 0, t0: null, moved: false, hints: 0, solved: false,
+    hintCells: new Array(N).fill(0),
+    undo: [], pending: null, lit: [], litSign: -1, wrong: [], target: -1,
+  };
+  const saved = lade(storeKey, null);
+  if (saved && saved.seed === seed && saved.preset === presetId && (saved.gen || 1) === gen && Array.isArray(saved.values) && saved.values.length === N) {
+    g.values = saved.values.map((v, i) => (p.given[i] ? p.sol[i] : v));
+    g.notes = saved.notes || g.notes;
+    g.elapsed = saved.elapsed || 0; g.hints = saved.hints || 0;
+    g.solved = !!saved.solved; g.moved = g.elapsed > 0;
+    if (Array.isArray(saved.hintCells) && saved.hintCells.length === N) g.hintCells = saved.hintCells;
+  }
+  return g;
+}
+function saveGame(g) {
+  sichere(g.storeKey, { seed: g.seed, preset: g.presetId, gen: g.gen, values: g.values, notes: g.notes, elapsed: elapsedOf(g), hints: g.hints, hintCells: g.hintCells, solved: g.solved });
+}
+function loadDaily() {
+  const t = today();
+  state.games.tag = makeGame('primeln.tag.' + t.key, t.key, t.preset, t, t.gen);
+}
+function newEndless(presetId) {
+  const seed = Math.random().toString(36).slice(2, 10) + Date.now().toString(36);
+  sichere('primeln.endlos.aktuell', { seed, preset: presetId, gen: GEN });
+  state.games.endlos = makeGame('primeln.endlos.stand', seed, presetId, null, GEN);
+  saveGame(state.games.endlos);
+}
+function loadEndless() {
+  const a = lade('primeln.endlos.aktuell', null);
+  if (a && PRESETS[a.preset]) state.games.endlos = makeGame('primeln.endlos.stand', a.seed, a.preset, null, a.gen || 1);
+  else newEndless(PRESETS[settings.stufe] ? settings.stufe : 'staude');
+}
+
+/* ===== Zeit ===== */
+const elapsedOf = (g) => g.elapsed + (g.t0 != null ? performance.now() - g.t0 : 0);
+function startClock(g) { if (g.t0 == null && !g.solved) g.t0 = performance.now(); }
+function stopClock(g) { if (g && g.t0 != null) { g.elapsed += performance.now() - g.t0; g.t0 = null; } }
+function showClock() { const g = cur(); if (g) $('#clock').textContent = fmtTime(elapsedOf(g)); }
+setInterval(() => {
+  showClock();
+  if (state.games.tag && state.games.tag.info.key !== today().key) { // Mitternacht: neues Tagesbeet
+    stopClock(state.games.tag); loadDaily();
+    if (state.mode === 'tag') { render(); say('Neuer Tag, neues Beet.'); }
+  }
+}, 500);
+document.addEventListener('visibilitychange', () => {
+  const g = cur(); if (!g) return;
+  if (document.hidden) { stopClock(g); saveGame(g); }
+  else if (g.moved && !g.solved) startClock(g);
+});
+
+/* ===== Ton: jede Primel klingt als der Oberton ihrer Zahl ===== */
+let audio = null;
+function tone(freq, at, dur, vol) {
+  const o = audio.createOscillator(), a = audio.createGain();
+  o.type = 'triangle'; o.frequency.value = freq;
+  a.gain.setValueAtTime(0, at); a.gain.linearRampToValueAtTime(vol, at + 0.012);
+  a.gain.exponentialRampToValueAtTime(0.0001, at + dur);
+  o.connect(a); a.connect(audio.destination); o.start(at); o.stop(at + dur + 0.05);
+}
+function play(kind, k) {
+  if (!settings.ton) return;
+  try {
+    if (!audio) audio = new (window.AudioContext || window.webkitAudioContext)();
+    if (audio.state === 'suspended') audio.resume();
+    const t = audio.currentTime + 0.01, base = 110;
+    if (kind === 'plant') tone(base * PRIMES[k], t, 0.35, 0.09);
+    else if (kind === 'clear') tone(base, t, 0.12, 0.05);
+    else if (kind === 'win') {
+      [2, 3, 5, 7, 5, 3].forEach((n, i) => tone(base * n, t + i * 0.11, 0.4, 0.08));
+      [2, 3, 5, 7].forEach((n) => tone(base * n, t + 0.75, 1.4, 0.05));
+    }
+  } catch (e) { /* kein Ton verfügbar */ }
+}
+
+/* ===== Aufbau ===== */
+function say(html) { const s = $('#say'); s.innerHTML = html || ''; s.hidden = !!(cur() && cur().solved); }
+const lineName = (ln) => (ln.isRow ? 'Reihe' : 'Spalte');
+
+function render() {
+  const g = cur(), p = g.p, lines = allLines(p);
+  $('#tabTag').setAttribute('aria-selected', state.mode === 'tag');
+  $('#tabEndlos').setAttribute('aria-selected', state.mode === 'endlos');
+  const stufe = PRESETS[g.presetId].name;
+  if (state.mode === 'tag') {
+    $('#title').textContent = g.info.nr >= 1 ? 'Tagesbeet Nr. ' + g.info.nr : 'Tagesbeet';
+    $('#sub').textContent = g.info.text + ', Stufe ' + stufe;
+  } else {
+    $('#title').textContent = 'Endlosbeet';
+    $('#sub').textContent = endlessSub(g);
+  }
+
+  // Stufenwahl
+  const lv = $('#levels'); lv.hidden = state.mode !== 'endlos'; lv.textContent = '';
+  $('#btnNew').hidden = state.mode !== 'endlos';
+  if (state.mode === 'endlos') {
+    for (const id of PRESET_ORDER) {
+      const c = PRESETS[id], b = el('button', 'btn', c.name + '<small>' + c.R + '×' + c.C + '</small>');
+      b.setAttribute('aria-pressed', id === g.presetId);
+      b.addEventListener('click', () => { if (id !== cur().presetId) startEndless(id); });
+      lv.appendChild(b);
+    }
+  }
+
+  // Beet
+  const plot = $('#plot'), bed = $('#bed'), cs = $('#colsigns'), rs = $('#rowsigns');
+  plot.style.setProperty('--C', p.C);
+  bed.textContent = ''; cs.textContent = ''; rs.textContent = '';
+  bed.classList.remove('won'); bed.classList.add('fresh');
+  clearTimeout(render.t); render.t = setTimeout(() => bed.classList.remove('fresh'), 900);
+  cellEls = []; signEls = [];
+  for (let i = 0; i < p.R * p.C; i++) {
+    const b = el('button', 'cell' + (p.given[i] ? ' given' : ''));
+    b.dataset.idx = i; b.tabIndex = i === 0 ? 0 : -1;
+    b.style.setProperty('--d', ((Math.floor(i / p.C) + (i % p.C)) * 45) + 'ms');
+    b.style.setProperty('--w', ((Math.floor(i / p.C) + (i % p.C)) * 70) + 'ms');
+    bed.appendChild(b); cellEls.push(b);
+  }
+  lines.forEach((ln, j) => {
+    const prod = ln.isRow ? p.rowProd[ln.i] : p.colProd[ln.i];
+    const s = el('button', 'sign' + (prod == null ? ' rust' : ''), prod == null ? '?' : fmtNum(prod));
+    s.dataset.line = j;
+    (ln.isRow ? rs : cs).appendChild(s); signEls.push(s);
+  });
+
+  // Töpfe
+  if (state.tool !== 'leer' && state.tool >= p.K) state.tool = 0;
+  const pal = $('#palette'); pal.textContent = '';
+  for (let k = 0; k < p.K; k++) {
+    const b = el('button', 'pot', flowerSVG(k));
+    b.dataset.tool = k; b.setAttribute('aria-label', 'Primel mit ' + PRIMES[k] + ' Blütenblättern');
+    pal.appendChild(b);
+  }
+  const e = el('button', 'pot empty', '×'); e.dataset.tool = 'leer'; e.setAttribute('aria-label', 'Feld leeren'); e.title = 'Feld leeren';
+  pal.appendChild(e);
+
+  $('#tools').hidden = g.solved; $('#win').hidden = !g.solved;
+  if (g.solved) { bed.classList.add('won'); fillWin(g); say(''); }
+  else if (!g.moved) say('Jedes Schild nennt das Produkt seiner Reihe oder Spalte. Gleiche Primeln stehen nie direkt nebeneinander.');
+  else say('');
+  layout(); paint(); showClock();
+}
+
+function layout() {
+  const g = cur(); if (!g) return;
+  const p = g.p, W = Math.min($('#plotWrap').clientWidth, 540), small = W < 400;
+  const signw = small ? 48 : 58, gap = small ? 3 : 4, pad = small ? 5 : 7;
+  const byWidth = Math.floor((W - signw - 6 - pad * 2 - gap * (p.C - 1)) / p.C);
+  const byHeight = Math.floor((window.innerHeight - 330 - gap * (p.R - 1)) / (p.R + 0.7));
+  const cell = Math.max(30, Math.min(byWidth, 64, Math.max(byHeight, 42)));
+  const st = $('#plot').style;
+  st.setProperty('--cell', cell + 'px'); st.setProperty('--gap', gap + 'px');
+  st.setProperty('--pad', pad + 'px'); st.setProperty('--signw', signw + 'px');
+}
+window.addEventListener('resize', layout);
+
+function paint() {
+  const g = cur(), p = g.p, N = p.R * p.C, lines = allLines(p);
+  for (let i = 0; i < N; i++) {
+    const c = cellEls[i], v = g.values[i], sig = v >= 0 ? 'v' + v : 'n' + g.notes[i];
+    if (c.dataset.sig !== sig) { c.dataset.sig = sig; c.innerHTML = v >= 0 ? flowerSVG(v) : notesHTML(g.notes[i], p.K); }
+    const clash = v >= 0 && neighbours(p, i).some((n) => g.values[n] === v);
+    c.classList.toggle('clash', clash);
+    c.classList.toggle('lit', g.lit.includes(i));
+    c.classList.toggle('target', g.target === i);
+    c.classList.toggle('wrong', g.wrong.includes(i));
+    const r = Math.floor(i / p.C) + 1, col = (i % p.C) + 1;
+    let label = 'Reihe ' + r + ', Spalte ' + col + ': ';
+    if (v >= 0) label += 'Primel ' + PRIMES[v] + (p.given[i] ? ', im Topf' : '') + (clash ? ', neben einer gleichen' : '');
+    else {
+      const ns = PRIMES.filter((_, k) => (g.notes[i] >> k) & 1);
+      label += 'leer' + (ns.length ? ', notiert ' + ns.join(' ') : '');
+    }
+    c.setAttribute('aria-label', label);
+  }
+  lines.forEach((ln, j) => {
+    const s = signEls[j];
+    let status = '';
+    if (ln.cnt) {
+      const have = new Array(p.K).fill(0); let filled = 0;
+      for (const i of ln.cells) if (g.values[i] >= 0) { have[g.values[i]]++; filled++; }
+      if (have.some((n, k) => n > ln.cnt[k])) status = 'bad';
+      else if (filled === ln.cells.length) status = 'ok';
+    }
+    s.classList.toggle('ok', status === 'ok'); s.classList.toggle('bad', status === 'bad');
+    s.classList.toggle('lit', g.litSign === j);
+    const prod = ln.isRow ? p.rowProd[ln.i] : p.colProd[ln.i];
+    s.setAttribute('aria-label', lineName(ln) + ' ' + (ln.i + 1) + ': ' + (prod == null ? 'Schild verwittert' : 'Produkt ' + prod) +
+      (status === 'ok' ? ', stimmt' : status === 'bad' ? ', passt nicht' : ''));
+  });
+  document.querySelectorAll('.pot').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.tool) === String(state.tool)));
+  $('#btnNote').setAttribute('aria-pressed', state.noteMode);
+  $('#btnHint').textContent = g.pending ? 'Einpflanzen' : 'Tipp';
+  $('#btnUndo').disabled = g.undo.length === 0;
+}
+
+/* ===== Spielzüge ===== */
+function clearMarks(g) { g.pending = null; g.lit = []; g.litSign = -1; g.wrong = []; g.target = -1; }
+function bump(node) { node.classList.remove('bump'); void node.offsetWidth; node.classList.add('bump'); }
+
+function place(i, tool, note) {
+  const g = cur(), p = g.p;
+  if (g.solved) return;
+  if (p.given[i]) { bump(cellEls[i]); say('Primeln im Zinktopf standen schon da und bleiben, wo sie sind.'); return; }
+  const before = { values: g.values.slice(), notes: g.notes.slice() };
+  if (tool === 'leer') {
+    if (g.values[i] < 0 && !g.notes[i]) return;
+    g.values[i] = -1; g.notes[i] = 0; play('clear');
+  } else if (note) {
+    if (g.values[i] >= 0) { say('Notizen passen nur auf leere Felder.'); return; }
+    g.notes[i] ^= 1 << tool;
+  } else if (g.values[i] === tool) {
+    g.values[i] = -1; play('clear');
+  } else {
+    g.values[i] = tool; g.notes[i] = 0;
+    for (const n of neighbours(p, i)) g.notes[n] &= ~(1 << tool); // Nachbarn können diese Primel nicht mehr sein
+    play('plant', tool);
+  }
+  g.undo.push(before); if (g.undo.length > 400) g.undo.shift();
+  afterChange(g);
+}
+function afterChange(g) {
+  clearMarks(g); g.moved = true; startClock(g);
+  const p = g.p, full = g.values.every((v) => v >= 0);
+  if (full && g.values.every((v, i) => v === p.sol[i])) { win(g); return; }
+  say(full ? 'Das Beet ist voll, aber noch stimmt nicht alles. Rote Schilder und welke Primeln zeigen, wo.' : '');
+  paint(); saveGame(g);
+}
+function undo() {
+  const g = cur(); if (g.solved || !g.undo.length) return;
+  const b = g.undo.pop(); g.values = b.values; g.notes = b.notes;
+  clearMarks(g); say(''); paint(); saveGame(g);
+}
+
+function hint() {
+  const g = cur(), p = g.p; if (g.solved) return;
+  const wrong = []; g.values.forEach((v, i) => { if (v >= 0 && v !== p.sol[i]) wrong.push(i); });
+  if (wrong.length) {
+    clearMarks(g); g.wrong = wrong; g.hints++; g.moved = true; startClock(g);
+    say(wrong.length === 1 ? 'Eine Primel steht am falschen Platz. Sie wackelt gerade.' : wrong.length + ' Primeln stehen am falschen Platz. Sie wackeln gerade.');
+    paint(); saveGame(g);
+    cellEls.forEach((c) => { if (c.classList.contains('wrong')) { c.classList.remove('wrong'); void c.offsetWidth; c.classList.add('wrong'); } });
+    return;
+  }
+  if (g.pending) { const st = g.pending; place(st.idx, st.k, false); return; }
+  const st = nextStep(p, g.values); if (!st) return;
+  clearMarks(g); g.hints++; g.moved = true; startClock(g); g.pending = st; g.hintCells[st.idx] = 1;
+  const w = st.why, ln = w.line, wo = ln ? 'Die leuchtende ' + lineName(ln) : '';
+  if (ln) { g.lit = ln.cells.slice(); g.litSign = allLines(p).indexOf(ln); }
+  if (w.rule === 'platz') {
+    const have = ln.cells.filter((i) => g.values[i] === w.k).length, need = ln.cnt[w.k] - have;
+    say(need === 1
+      ? wo + ' braucht noch einmal die <b>' + PRIMES[w.k] + '</b>, und nur ein Feld kommt dafür in Frage.'
+      : wo + ' braucht noch ' + need + ' Mal die <b>' + PRIMES[w.k] + '</b>, und genau ' + need + ' Felder kommen dafür in Frage.');
+  } else if (w.rule === 'abstand') {
+    g.target = st.idx;
+    say(explainSpacing(w, ln, ln.cells.indexOf(st.idx)));
+  } else if (w.rule === 'reihe') {
+    say('Geh die leuchtende ' + lineName(ln) + ' im Ganzen durch: Schild, Nachbarn und Abstand lassen für ein Feld nur eine Primel übrig.');
+  } else {
+    g.lit = []; g.litSign = -1; g.target = st.idx;
+    say('Für das leuchtende Feld bleibt nur eine Primel übrig. Schau auf seine Nachbarn und auf die beiden Schilder.');
+  }
+  paint(); saveGame(g);
+}
+
+function showFactors(j) {
+  const g = cur(), p = g.p, ln = allLines(p)[j];
+  if (g.solved) return;
+  g.pending = null; g.wrong = []; g.target = -1; g.lit = ln.cells.slice(); g.litSign = j;
+  if (!ln.cnt) say('Dieses Schild ist verwittert. Hier hilft nur der Rest des Beets.');
+  else {
+    const f = []; ln.cnt.forEach((n, k) => { for (let x = 0; x < n; x++) f.push(PRIMES[k]); });
+    say('<b>' + fmtNum(prodOf(ln.cnt)) + ' = ' + f.join(' · ') + '</b>');
+  }
+  paint();
+}
+
+/* Abstand-Regel in Worten: welche Plätze, und warum. Plätze zählen von links bzw. von oben. */
+const SORTE = ['Zweier', 'Dreier', 'Fünfer', 'Siebener'];
+const ANZAHL = ['keinen', 'einen', 'zwei', 'drei', 'vier', 'fünf', 'sechs'];
+function posList(mask, n) {
+  const a = []; for (let j = 0; j < n; j++) if ((mask >> j) & 1) a.push(j + 1);
+  const txt = a.length > 1 ? a.slice(0, -1).join(', ') + ' und ' + a[a.length - 1] : String(a[0]);
+  return { txt, plural: a.length > 1 };
+}
+function explainSpacing(w, ln, j) {
+  const n = ln.cells.length, k = w.k, need = ln.cnt[k], all = (1 << n) - 1;
+  const zahl = '<b>' + PRIMES[k] + '</b>', dir = ln.isRow ? 'von links' : 'von oben';
+  let dirSaid = false; // Zählrichtung nur beim ersten Nennen von Plätzen
+  const platz = (m) => { const l = posList(m, n), d = dirSaid ? '' : ' (' + dir + ' gezählt)'; dirSaid = true; return (l.plural ? 'die Plätze ' : 'Platz ') + l.txt + d; };
+  let t = 'Die leuchtende ' + lineName(ln) + ' braucht ' + ANZAHL[need] + ' ' + SORTE[k];
+  if (w.avail !== all) t += ', und die ' + zahl + ' kommt dort nur noch für ' + platz(w.avail) + ' in Frage';
+  t += '. ';
+  const inInter = (w.inter >> j) & 1;
+  if (need === 1) return t + 'Damit steht das leuchtende Feld fest.';
+  if (inInter && w.union === w.inter)
+    return t + 'Gleiche Primeln dürfen sich nicht berühren. Also bleiben für die ' + ANZAHL[need] + ' ' + SORTE[k] + ' genau ' + platz(w.union) + '.';
+  if (inInter)
+    return t + 'Wie man sie auch verteilt, ohne dass sie sich berühren: ' + platz(w.inter) + (posList(w.inter, n).plural ? ' sind' : ' ist') + ' immer dabei.';
+  return t + 'Weil sie sich nicht berühren dürfen, passen sie nur auf ' + platz(w.union) +
+    '. Das leuchtende Feld scheidet für die ' + zahl + ' also aus, und dort bleibt nur eine Primel übrig.';
+}
+
+/* ===== Geschafft ===== */
+function streak() {
+  const res = lade('primeln.ergebnisse', {}); let n = 0, k = today().key;
+  while (res[k]) { n++; k = shiftKey(k, -1); }
+  return n;
+}
+function tippText(n, ganz) { return n === 0 ? (ganz ? 'ganz ohne Tipp' : 'ohne Tipp') : n === 1 ? 'mit einem Tipp' : 'mit ' + n + ' Tipps'; }
+/* Teilt nur, wie es lief, nie die Lösung: 🪴 stand schon da, 🌼 selbst gepflanzt, 💡 per Tipp verraten. */
+function shareParts(g) {
+  const c = PRESETS[g.presetId], p = g.p, rows = [];
+  for (let r = 0; r < p.R; r++) {
+    let row = '';
+    for (let col = 0; col < p.C; col++) { const i = r * p.C + col; row += p.given[i] ? '🪴' : g.hintCells[i] ? '💡' : '🌼'; }
+    rows.push(row);
+  }
+  return {
+    head: 'Primeln Nr. ' + g.info.nr + ', ' + c.name + '\n' + fmtTime(g.elapsed) + ' ' + tippText(g.hints, false),
+    grid: rows.join('\n'),
+    url: BRAND.url,
+  };
+}
+const shareText = (g) => { const s = shareParts(g); return s.head + '\n\n' + s.grid + '\n\n' + s.url; };
+
+function untilMidnight() {
+  const now = new Date(), m = new Date(now); m.setHours(24, 0, 0, 0);
+  const min = Math.max(1, Math.ceil((m - now) / 60000)), h = Math.floor(min / 60), r = min % 60;
+  return h ? h + ' Std. ' + r + ' Min.' : r + ' Min.';
+}
+const share = $('#share');
+let shareNoteFixed = false;
+function openShare() {
+  const g = state.games.tag; if (!g || !g.solved) return;
+  const sp = shareParts(g), s = streak();
+  $('#shareTitle').textContent = 'Tagesbeet Nr. ' + g.info.nr + ' blüht.';
+  $('#shareSum').textContent = 'In ' + fmtTime(g.elapsed) + ' gelöst, ' + tippText(g.hints, true) + '.' + (s >= 2 ? ' Dein ' + s + '. Tag in Folge.' : '');
+  const pre = $('#sharePre'); pre.textContent = '';
+  pre.append(sp.head + '\n\n', el('span', 'grid', null), '\n\n', el('span', 'url', null));
+  pre.querySelector('.grid').textContent = sp.grid; pre.querySelector('.url').textContent = sp.url;
+  $('#btnShare').hidden = !navigator.share;
+  $('#btnCopy').classList.toggle('primary', !navigator.share);
+  $('#btnCopy').textContent = 'Text kopieren';
+  shareNoteFixed = false; showNext();
+  if (!share.open) { if (share.showModal) share.showModal(); else share.setAttribute('open', ''); }
+  ($('#btnShare').hidden ? $('#btnCopy') : $('#btnShare')).focus();
+}
+function showNext() { if (!shareNoteFixed) $('#shareNote').textContent = 'Das nächste Beet wächst in ' + untilMidnight(); }
+function shareNote(t) { shareNoteFixed = true; $('#shareNote').textContent = t; }
+function closeShare() { if (share.close) share.close(); else share.removeAttribute('open'); }
+async function copyShare() {
+  const text = shareText(state.games.tag);
+  try { await navigator.clipboard.writeText(text); $('#btnCopy').textContent = 'Kopiert'; shareNote('Jetzt einfach in den Chat einfügen.'); }
+  catch (e) {
+    const r = document.createRange(); r.selectNodeContents($('#sharePre'));
+    const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r);
+    shareNote('Der Text ist markiert. Kopiere ihn mit Strg+C oder ⌘C.');
+  }
+}
+$('#btnShare').addEventListener('click', async () => {
+  try { await navigator.share({ text: shareText(state.games.tag) }); shareNote('Geteilt. Viel Spaß beim Vergleichen.'); }
+  catch (e) { if (e && e.name !== 'AbortError') copyShare(); }
+});
+$('#btnCopy').addEventListener('click', copyShare);
+$('#shareClose').addEventListener('click', closeShare);
+share.addEventListener('click', (e) => { if (e.target === share) closeShare(); });
+setInterval(() => { if (share.open) showNext(); }, 15000);
+
+function fillWin(g) {
+  const tipps = tippText(g.hints, true);
+  const acts = $('#winActions'); acts.textContent = '';
+  if (state.mode === 'tag') {
+    const s = streak();
+    $('#winText').textContent = 'Tagesbeet' + (g.info.nr >= 1 ? ' Nr. ' + g.info.nr : '') + ' in ' + fmtTime(g.elapsed) + ' gelöst, ' + tipps + '.' +
+      (s >= 2 ? ' Das ist dein ' + s + '. Tag in Folge.' : '') + ' Das nächste wächst ab Mitternacht.';
+    const sh = el('button', 'btn primary', 'Ergebnis teilen');
+    sh.addEventListener('click', openShare);
+    const more = el('button', 'btn', 'Im Endlosmodus weiterspielen');
+    more.addEventListener('click', () => setMode('endlos'));
+    acts.append(sh, more);
+  } else {
+    $('#winText').textContent = PRESETS[g.presetId].name + ' in ' + fmtTime(g.elapsed) + ' gelöst, ' + tipps + '.';
+    const next = el('button', 'btn primary', 'Nächstes Beet');
+    next.addEventListener('click', () => startEndless(cur().presetId));
+    acts.append(next);
+    const i = PRESET_ORDER.indexOf(g.presetId);
+    if (i < PRESET_ORDER.length - 1) {
+      const up = el('button', 'btn', 'Eine Stufe schwerer');
+      up.addEventListener('click', () => startEndless(PRESET_ORDER[i + 1]));
+      acts.append(up);
+    }
+  }
+}
+function win(g) {
+  stopClock(g); g.solved = true; clearMarks(g); g.undo = [];
+  if (state.mode === 'tag') { const res = lade('primeln.ergebnisse', {}); res[g.info.key] = { t: Math.round(g.elapsed), h: g.hints }; sichere('primeln.ergebnisse', res); }
+  else sichere('primeln.endlos.zahl', lade('primeln.endlos.zahl', 0) + 1);
+  saveGame(g); paint(); play('win');
+  const bed = $('#bed'); bed.classList.add('won');
+  const bee = el('div', 'bee', BEE); bed.appendChild(bee);
+  bee.addEventListener('animationend', (e) => { if (e.animationName === 'flug') bee.remove(); });
+  say(''); $('#tools').hidden = true; $('#win').hidden = false; fillWin(g);
+  if (state.mode === 'endlos') $('#sub').textContent = endlessSub(g);
+  const first = $('#winActions button'); if (first) first.focus({ preventScroll: true });
+  if (state.mode === 'tag') {
+    const calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    setTimeout(() => { if (state.mode === 'tag' && !help.open) openShare(); }, calm ? 300 : 1700);
+  }
+}
+function endlessSub(g) {
+  const n = lade('primeln.endlos.zahl', 0);
+  return 'Stufe ' + PRESETS[g.presetId].name + (n === 1 ? ', ein Beet blüht schon' : n > 1 ? ', ' + n + ' Beete blühen schon' : '');
+}
+
+/* ===== Modi ===== */
+function setMode(m) {
+  if (m === state.mode) return;
+  const old = cur(); stopClock(old); saveGame(old);
+  state.mode = m;
+  const g = cur(); if (g.moved && !g.solved) startClock(g);
+  render();
+}
+function startEndless(presetId) {
+  stopClock(state.games.endlos);
+  settings.stufe = presetId; sichere('primeln.einstellungen', settings);
+  newEndless(presetId); render();
+}
+
+/* ===== Eingaben ===== */
+$('#tabTag').addEventListener('click', () => setMode('tag'));
+$('#tabEndlos').addEventListener('click', () => setMode('endlos'));
+$('#bed').addEventListener('click', (e) => {
+  const c = e.target.closest('.cell'); if (!c) return;
+  setFocusCell(+c.dataset.idx, false);
+  place(+c.dataset.idx, state.tool, state.noteMode);
+});
+$('#bed').addEventListener('contextmenu', (e) => {
+  const c = e.target.closest('.cell'); if (!c) return;
+  e.preventDefault(); place(+c.dataset.idx, 'leer', false);
+});
+$('#plot').addEventListener('click', (e) => { const s = e.target.closest('.sign'); if (s) showFactors(+s.dataset.line); });
+$('#palette').addEventListener('click', (e) => {
+  const b = e.target.closest('.pot'); if (!b) return;
+  state.tool = b.dataset.tool === 'leer' ? 'leer' : +b.dataset.tool; paint();
+});
+$('#btnNew').addEventListener('click', () => startEndless(cur().presetId));
+$('#btnNote').addEventListener('click', toggleNotes);
+$('#btnUndo').addEventListener('click', undo);
+$('#btnHint').addEventListener('click', hint);
+function toggleNotes() {
+  state.noteMode = !state.noteMode; paint();
+  say(state.noteMode ? 'Notizen an: Tippen merkt eine Primel als Möglichkeit vor, statt sie zu pflanzen.' : 'Notizen aus: Tippen pflanzt wieder.');
+}
+function setFocusCell(i, focus) {
+  cellEls.forEach((c, j) => { c.tabIndex = j === i ? 0 : -1; });
+  if (focus) cellEls[i].focus();
+}
+
+const help = $('#help');
+function openHelp() {
+  if (help.showModal) help.showModal(); else help.setAttribute('open', '');
+  help.scrollTop = 0; $('#helpTitle').focus({ preventScroll: true });
+}
+$('#btnHelp').addEventListener('click', openHelp);
+$('#helpClose').addEventListener('click', () => { if (help.close) help.close(); else help.removeAttribute('open'); });
+help.addEventListener('click', (e) => { if (e.target === help && help.close) help.close(); });
+
+function showSound() { const b = $('#btnSound'); b.textContent = settings.ton ? 'Ton an' : 'Ton aus'; b.setAttribute('aria-pressed', settings.ton); }
+$('#btnSound').addEventListener('click', () => {
+  settings.ton = !settings.ton; sichere('primeln.einstellungen', settings); showSound();
+  if (settings.ton) play('plant', 1);
+});
+
+document.addEventListener('keydown', (e) => {
+  if (help.open || share.open) return;
+  const g = cur(), p = g.p;
+  if (e.ctrlKey || e.metaKey) { if (e.key.toLowerCase() === 'z') { e.preventDefault(); undo(); } return; }
+  if (e.altKey) return;
+  const a = document.activeElement, onCell = a && a.classList && a.classList.contains('cell');
+  const idx = onCell ? +a.dataset.idx : -1;
+  const digit = /^(?:Digit|Numpad)([2357])$/.exec(e.code);
+  if (digit) {
+    const k = PRIMES.indexOf(+digit[1]);
+    if (k < p.K) { state.tool = k; if (onCell) place(idx, k, state.noteMode || e.shiftKey); else paint(); }
+    e.preventDefault(); return;
+  }
+  if (onCell) {
+    const r = Math.floor(idx / p.C), c = idx % p.C;
+    let t = -1;
+    if (e.key === 'ArrowUp' && r > 0) t = idx - p.C;
+    else if (e.key === 'ArrowDown' && r < p.R - 1) t = idx + p.C;
+    else if (e.key === 'ArrowLeft' && c > 0) t = idx - 1;
+    else if (e.key === 'ArrowRight' && c < p.C - 1) t = idx + 1;
+    if (e.key.startsWith('Arrow')) { e.preventDefault(); if (t >= 0) setFocusCell(t, true); return; }
+    if (e.key === 'Backspace' || e.key === 'Delete' || e.code === 'Digit0' || e.code === 'Numpad0') { e.preventDefault(); place(idx, 'leer', false); return; }
+  }
+  const key = e.key.toLowerCase();
+  if (key === 'n') toggleNotes();
+  else if (key === 'z') undo();
+  else if (key === 't') hint();
+});
+
+/* ===== Start ===== */
+$('#lpMark').innerHTML = brandMark({ attrs: 'aria-hidden="true"' });
+$('#logoMark').innerHTML = brandMark({ attrs: 'aria-hidden="true"' });
+(function demo() {
+  const d = $('#demo');
+  d.appendChild(el('span', 'sign', '84')).style.cssText = 'display:grid;place-items:center';
+  [0, 3, 0, 1].forEach((k) => d.appendChild(el('span', 'cell', flowerSVG(k))));
+})();
+showSound();
+loadDaily(); loadEndless();
+render();
+})();
+</script>
+</body>
+</html>
